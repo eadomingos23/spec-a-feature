@@ -1869,15 +1869,25 @@ Supervised teams shall be organized by section names.
 11. Use case ends.
 
 **Extensions:**
+**Extensions:**
 - **3a. The selected week is not one of the course section's active weeks:**
   - 3a1. The system informs the instructor that submission status may be viewed only for the course section's active weeks (BR-active-weeks).
   - 3a2. The instructor returns to step 2 of the normal flow.
 - **5a. Every student has submitted both required submissions for the selected week:**
   - 5a1. The system informs the instructor that there are no students with missing submissions for the selected week.
   - 5a2. Use case ends.
+- **5b. A student in the course section is not assigned to a team:**
+  - 5b1. The system identifies the student as "Not assigned to a team" rather than identifying the weekly activity report or peer evaluation as missing (BR-team-assignment-required).
+  - 5b2. The student is not available for selection as a non-submitter to nudge.
+- **5c. A student's peer-evaluation submission window has closed without a submission:**
+  - 5c1. The system displays the peer evaluation as missed and indicates that its submission window has closed (BR-evaluation-submission-window).
+  - 5c2. The system does not allow the instructor to select the student for a reminder to submit that peer evaluation.
 - **6a. The instructor does not select any students:**
   - 6a1. The system does not send any reminder emails.
   - 6a2. The instructor may select one or more students or terminate the use case.
+- **6b. A selected student has previously been sent a reminder for the same missing submission:**
+  - 6b1. The system indicates that a previous reminder was sent.
+  - 6b2. The instructor may still select the student and continue with another reminder.
 - **8a. The instructor chooses not to confirm sending the reminders:**
   - 8a1. The system does not send any reminder emails.
   - 8a2. The instructor returns to step 6 of the normal flow or terminates the use case.
@@ -1885,8 +1895,7 @@ Supervised teams shall be organized by section names.
 **Priority:** High
 **Frequency of Use:** Approximately once per active week per instructor.
 
-**Business Rules:** BR-section-scoped-access, BR-team-scoped-access, BR-active-weeks
-
+**Business Rules:** BR-section-scoped-access, BR-team-assignment-required, BR-active-weeks, BR-evaluation-submission-window`
 **Associated Information:**
 
 Submission status:
