@@ -1834,6 +1834,89 @@ Supervised teams shall be organized by section names.
 **Assumptions:**
 **Open Issues:**
 
+
+
+### **UC-INS-nudge-non-submitters: The instructor views and nudges students who have not submitted**
+
+**UC ID and Name:** UC-INS-nudge-non-submitters: View and nudge students who have not submitted
+**Created By:** Eduarda Domingos
+**Date Created:** 10-02-2026
+**Primary Actor:** instructor
+**Secondary Actors:** student
+**Trigger:** The instructor indicates to view students who have not submitted their required weekly work for an active week.
+**Description:** The instructor wants to identify students who have not submitted their weekly activity report, peer evaluation, or both, so that the instructor can selectively send reminder emails to those students.
+
+**Preconditions:**
+- PRE-1. The instructor is logged into the system.
+- PRE-2. The instructor has access to the course section.
+- PRE-3. The selected week is one of the course section's active weeks.
+
+**Postconditions:**
+- POST-1. The instructor is shown the submission status of students in the course section for the selected week.
+- POST-2. Reminder emails are sent to the students selected by the instructor for a nudge.
+
+**Main Success Scenario:**
+1. The instructor indicates to view students who have not submitted their required weekly work.
+2. The system asks the instructor to select an active week.
+3. The instructor selects an active week.
+4. The system determines each student's submission status for the selected week separately for the weekly activity report and peer evaluation.
+5. The system displays students who are missing a weekly activity report, a peer evaluation, or both, and identifies which required submission is missing for each student.
+6. The instructor selects one or more displayed students to nudge.
+7. The system displays the selected students and asks the instructor to confirm sending the reminder emails.
+8. The instructor confirms.
+9. The system sends a reminder email to each selected student identifying the submission or submissions that are missing.
+10. The system informs the instructor that the reminders have been sent.
+11. Use case ends.
+
+**Extensions:**
+**Extensions:**
+- **3a. The selected week is not one of the course section's active weeks:**
+  - 3a1. The system informs the instructor that submission status may be viewed only for the course section's active weeks (BR-active-weeks).
+  - 3a2. The instructor returns to step 2 of the normal flow.
+- **5a. Every student has submitted both required submissions for the selected week:**
+  - 5a1. The system informs the instructor that there are no students with missing submissions for the selected week.
+  - 5a2. Use case ends.
+- **5b. A student in the course section is not assigned to a team:**
+  - 5b1. The system identifies the student as "Not assigned to a team" rather than identifying the weekly activity report or peer evaluation as missing (BR-team-assignment-required).
+  - 5b2. The student is not available for selection as a non-submitter to nudge.
+- **5c. A student's peer-evaluation submission window has closed without a submission:**
+  - 5c1. The system displays the peer evaluation as missed and indicates that its submission window has closed (BR-evaluation-submission-window).
+  - 5c2. The system does not allow the instructor to select the student for a reminder to submit that peer evaluation.
+- **6a. The instructor does not select any students:**
+  - 6a1. The system does not send any reminder emails.
+  - 6a2. The instructor may select one or more students or terminate the use case.
+- **6b. A selected student has previously been sent a reminder for the same missing submission:**
+  - 6b1. The system indicates that a previous reminder was sent.
+  - 6b2. The instructor may still select the student and continue with another reminder.
+- **8a. The instructor chooses not to confirm sending the reminders:**
+  - 8a1. The system does not send any reminder emails.
+  - 8a2. The instructor returns to step 6 of the normal flow or terminates the use case.
+
+**Priority:** High
+**Frequency of Use:** Approximately once per active week per instructor.
+
+**Business Rules:** BR-section-scoped-access, BR-team-assignment-required, BR-active-weeks, BR-evaluation-submission-window`
+**Associated Information:**
+
+Submission status:
+- Weekly activity report status and peer evaluation status are determined separately.
+- A student appears as a non-submitter when the student is missing the weekly activity report, the peer evaluation, or both for the selected week.
+- The system identifies which submission or submissions are missing for each displayed student.
+- The instructor may select which displayed students receive a reminder.
+
+**Related Use Cases:** The scheduled reminder behavior that skips students who have already submitted is system-triggered behavior and is outside the scope of this instructor-triggered use case.
+
+**Assumptions:**
+- A weekly activity report and a peer evaluation are independent submissions.
+
+**Open Issues:**
+- How should a student who is not assigned to a team be treated for peer-evaluation submission status?
+- Should an instructor be allowed to send another nudge to a student who has already been nudged for the same missing submission?
+- What should the instructor see if delivery of a reminder email is rejected?
+- If a previously submitted artifact is deleted, should the student immediately return to the non-submitter list?
+- Should instructors be able to view or nudge non-submitters after a submission window has closed?
+
+
 ## **Account**
 
 ### **UC-ACC-setup-student-account: The student sets up a student account**
